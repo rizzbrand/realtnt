@@ -15,63 +15,12 @@ export default function HeroReveal() {
     let splitInstances: SplitText[] = [];
     let introStarted = false;
     let fontsReady = false;
-    let brandComplete = false;
-
-    gsap.set(".preloader-label", { opacity: 0, scale: 0.97 });
-    gsap.set(".preloader-char", {
-      opacity: 0,
-      y: 16,
-      scale: 0.5,
-    });
-
-    const brandTl = gsap.timeline({ delay: 0.15 });
-
-    brandTl.to(".preloader-label", {
-      opacity: 1,
-      scale: 1,
-      duration: 0.7,
-      ease: "power2.out",
-    });
-
-    brandTl.to(
-      ".preloader-char",
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.48,
-        stagger: 0.08,
-        ease: "back.out(2)",
-      },
-      "-=0.35",
-    );
-
-    brandTl.to(
-      ".preloader-label",
-      {
-        scale: 1.02,
-        duration: 0.35,
-        ease: "power1.out",
-      },
-      "-=0.1",
-    );
-
-    brandTl.to(".preloader-label", {
-      scale: 1,
-      duration: 0.45,
-      ease: "power2.out",
-    });
 
     const tryStartIntro = () => {
-      if (!fontsReady || !brandComplete || introStarted) return;
+      if (!fontsReady || introStarted) return;
       introStarted = true;
       init();
     };
-
-    brandTl.eventCallback("onComplete", () => {
-      brandComplete = true;
-      tryStartIntro();
-    });
 
     const init = () => {
       const introImages = document.querySelectorAll(".intro-img");
@@ -108,7 +57,7 @@ export default function HeroReveal() {
       });
 
       const splitResult = SplitText.create(
-        "nav a, .hero-eyebrow, .hero-header h1, .hero-cta p, .hero-cta a, .hero-scroll span",
+        "nav .nav-link-label, .hero-eyebrow, .hero-header h1, .hero-cta p, .hero-cta a, .hero-scroll span",
         {
           type: "lines",
           linesClass: "line",
@@ -122,7 +71,7 @@ export default function HeroReveal() {
 
       gsap.set(".line", { y: "125%" });
 
-      const tl = gsap.timeline({ delay: 0.5 });
+      const tl = gsap.timeline({ delay: 0.15 });
 
       tl.to(".preloader", {
         scaleX: 1,
@@ -138,18 +87,6 @@ export default function HeroReveal() {
         duration: 1.25,
         ease: "hop",
       });
-
-      tl.to(
-        ".preloader-label",
-        {
-          opacity: 0,
-          y: -10,
-          filter: "blur(6px)",
-          duration: 0.55,
-          ease: "power2.in",
-        },
-        "<0.5",
-      );
 
       tl.to(
         ".preloader-overlay",
@@ -248,7 +185,6 @@ export default function HeroReveal() {
     });
 
     return () => {
-      brandTl.kill();
       splitInstances.forEach((instance) => instance.revert());
       gsap.killTweensOf("*");
     };

@@ -1,11 +1,7 @@
+import Link from "next/link";
+import DropCountdown from "@/components/DropCountdown";
+import HeroLinks from "@/components/HeroLinks";
 import HeroReveal from "@/components/HeroReveal";
-import HeroVideo from "@/components/HeroVideo";
-import MobileNav from "@/components/MobileNav";
-import PreloaderBrand from "@/components/PreloaderBrand";
-import SpotifyEmbed from "@/components/SpotifyEmbed";
-
-const SPOTIFY_ARTIST_URL =
-  "https://open.spotify.com/artist/52gRpNZ055weWM8VzrOA6c";
 
 export default function Home() {
   return (
@@ -14,10 +10,7 @@ export default function Home() {
 
       <div className="preloader-overlay">
         <div className="preloader" />
-        <PreloaderBrand />
       </div>
-
-      <MobileNav />
 
       <section className="hero">
         <div className="hero-overlay" aria-hidden="true" />
@@ -29,7 +22,7 @@ export default function Home() {
           <img src="/img-2.jpg" alt="Realtnt studio portrait" />
         </div>
         <div className="intro-img hero-img">
-          <HeroVideo />
+          <img src="/img-3.jpg" alt="Realtnt hero portrait" />
         </div>
         <div className="intro-img">
           <img src="/img-4.jpg" alt="Realtnt live show" />
@@ -40,27 +33,17 @@ export default function Home() {
 
         <div className="hero-content">
           <div className="hero-header">
-            <p className="hero-eyebrow">Singer · Songwriter · Artist</p>
+            <p className="hero-eyebrow">🧨 The Fuse Is Lit</p>
             <h1>
-              Sound shaped in intimacy, carried with intention — every note a
-              confession, every silence part of the song.
+              Every song, video, and show is another step toward the next
+              explosion.
             </h1>
           </div>
 
           <div className="hero-footer">
             <div className="hero-cta">
-              <p>Listen Now</p>
-              <div className="hero-links">
-                <a
-                  href={SPOTIFY_ARTIST_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Spotify
-                </a>
-                <a href="#">Apple Music</a>
-                <a href="#">YouTube</a>
-              </div>
+              <p>Enter the transmission</p>
+              <HeroLinks />
             </div>
 
             <div className="hero-scroll">
@@ -75,24 +58,29 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="countdown-section">
+        <div className="section-inner">
+          <p className="section-eyebrow">⏳ The fuse is burning</p>
+          <h2 className="section-title">Detonation incoming.</h2>
+          <DropCountdown variant="hero" />
+          <p className="section-desc">
+            The slow burn continues. Pre-save when the signal goes live — every
+            second brings the next explosion closer.
+          </p>
+        </div>
+      </section>
+
       <section id="music" className="music-section">
         <div className="section-inner">
-          <p className="section-eyebrow">Music</p>
-          <h2 className="section-title">Stream on Spotify</h2>
+          <p className="section-eyebrow">💥 Ignition</p>
+          <h2 className="section-title">The fuse is burning.</h2>
           <p className="section-desc">
-            Listen to Realtnt&apos;s latest releases, singles, and discography.
+            Stream the latest charges or enter the vault for what hasn&apos;t
+            detonated yet.
           </p>
-          <div className="spotify-embed">
-            <SpotifyEmbed />
-          </div>
-          <a
-            href={SPOTIFY_ARTIST_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="section-link"
-          >
-            Open full profile on Spotify →
-          </a>
+          <Link href="/music" className="page-btn">
+            Launch charges →
+          </Link>
         </div>
       </section>
     </>

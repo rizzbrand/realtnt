@@ -1,25 +1,28 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Syne } from "next/font/google";
+import { Bricolage_Grotesque, Space_Grotesk } from "next/font/google";
+import { EasterEggProvider } from "@/components/EasterEggProvider";
+import SiteNav from "@/components/SiteNav";
+import Starfield from "@/components/Starfield";
+import { SITE } from "@/lib/site";
 import "./globals.css";
 
-const syne = Syne({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-syne",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-body",
   display: "swap",
 });
 
-const cormorant = Cormorant_Garamond({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  style: ["normal", "italic"],
-  variable: "--font-cormorant",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-display",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "realtnt — Singer, Songwriter & Artist",
-  description:
-    "Official portfolio of Realtnt — music, visuals, and live performances.",
+  title: "realtnt — The Fuse Is Lit",
+  description: SITE.description,
 };
 
 export const viewport = {
@@ -34,8 +37,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${syne.variable} ${cormorant.variable}`}>
-      <body>{children}</body>
+    <html lang="en" className={`${spaceGrotesk.variable} ${bricolage.variable}`}>
+      <body>
+        <EasterEggProvider>
+          <Starfield />
+          <SiteNav />
+          {children}
+        </EasterEggProvider>
+      </body>
     </html>
   );
 }
